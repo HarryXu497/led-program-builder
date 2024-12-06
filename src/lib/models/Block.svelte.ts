@@ -3,8 +3,8 @@ import type { Tuple } from "$lib/types/Tuple.type";
 abstract class BlockModel<N extends number = number> {
     private _values = $state<Tuple<string, N>>();
 
-    constructor(length: N) {
-        this._values = Array<string>(length).fill("") as Tuple<string, N>;
+    constructor(length: N, initialValues?: Tuple<string, N>) {
+        this._values = initialValues ? initialValues : Array<string>(length).fill("") as Tuple<string, N>;
     }
 
     get values() {

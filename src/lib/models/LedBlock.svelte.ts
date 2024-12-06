@@ -3,6 +3,10 @@ import type { Tuple } from "$lib/types/Tuple.type";
 import BlockModel from "./Block.svelte";
 
 class LedBlockModel extends BlockModel<4> {
+    constructor(initialValues?: Tuple<string, 4>) {
+        super(4, initialValues);
+    }
+
     transpile(): string {
         const numericalValues = this.values.map(value => Number(value)) as Tuple<number, 4>;
         const ledPosition = numericalValues[0];

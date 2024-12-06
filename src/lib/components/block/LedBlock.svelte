@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type LedBlockModel from "$lib/models/LedBlock.svelte";
-		import type { Tuple } from "$lib/types/Tuple.type";
     import Block from "./Block.svelte";
 
     interface Props {
