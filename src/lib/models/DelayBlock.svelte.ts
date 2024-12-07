@@ -11,9 +11,9 @@ class DelayBlockModel extends BlockModel<1> {
 
 		// LED Position
 		if (isNaN(delayMs) || !Number.isInteger(delayMs)) {
-			throw Error('LED delay must be an integer.');
+			throw Error('LED delay must be an integer larger than 0.');
 		} else if (delayMs < 1) {
-			throw Error('LED delay must be an integer larger than or equal to 1.');
+			throw Error('LED delay must be an integer larger than 0.');
 		}
 
 		return `delay(${delayMs});`;
