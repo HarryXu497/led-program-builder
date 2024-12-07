@@ -15,6 +15,7 @@
 	import { flip } from 'svelte/animate';
 	import SettingBlock from '$lib/components/block/SettingBlock.svelte';
 	import programMetadata, { DEFAULT_IMPLICIT_DELAY, DEFAULT_LED_PIN, DEFAULT_NUM_LEDS } from '$lib/state/programMetadata.svelte';
+	import Metadata from '$lib/components/Metadata.svelte';
 
 	hljs.registerLanguage('cpp', cpp);
 
@@ -58,7 +59,15 @@
 			copyButtonClicked = false;
 		}
 	}
+    const TITLE = "LED Program Builder";
+    const DESCRIPTION = "A simple Scratch-like web interface to generate C++ code for an Arduino-controlled addressable LED strip.";
 </script>
+
+<Metadata
+    title={TITLE}
+    description={DESCRIPTION}
+    url="https://harryxu497.github.io/led-program-builder/"
+/>
 
 <svelte:window onmouseup={onWindowMouseUp} />
 
