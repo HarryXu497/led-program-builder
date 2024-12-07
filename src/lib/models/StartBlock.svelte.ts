@@ -1,13 +1,13 @@
 import BlockModel from './Block.svelte';
 
-class ShowBlockModel extends BlockModel<0> {
+class StartBlockModel extends BlockModel<0> {
 	constructor() {
 		super(0);
 	}
 
 	transpile(): string {
-		return 'FastLED.show();';
+		return '';
 	}
 }
 
-export default ShowBlockModel;
+export default StartBlockModel;

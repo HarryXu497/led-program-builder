@@ -24,8 +24,14 @@
 		"prettier-plugin-svelte": "^3.2.6",
 		"svelte": "^5.0.0",
 		"svelte-check": "^4.0.0",
+		"svelte-dnd-action": "^0.9.52",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0",
 		"vite": "^6.0.0"
+	},
+	"dependencies": {
+		"highlight.js": "^11.10.0",
+		"remixicon": "^4.5.0",
+		"uuid": "^11.0.3"
 	}
 }
