@@ -1,21 +1,21 @@
 <script lang="ts">
-	import '../styles/styles.css';
-	import '../styles/reset.css';
-	import '../styles/highlight.css';
-	import 'remixicon/fonts/remixicon.css';
 	import DelayBlock from '$lib/components/block/DelayBlock.svelte';
 	import LedBlock from '$lib/components/block/LedBlock.svelte';
+	import SettingBlock from '$lib/components/block/SettingBlock.svelte';
+	import Metadata from '$lib/components/Metadata.svelte';
 	import DelayBlockModel from '$lib/models/DelayBlock.svelte';
 	import LedBlockModel from '$lib/models/LedBlock.svelte';
-	import type { Snippet } from 'svelte';
-	import { dndzone, type DndEvent } from 'svelte-dnd-action';
+	import programMetadata from '$lib/state/programMetadata.svelte';
 	import transpilationOutput from '$lib/state/transpilationOutput.svelte';
 	import hljs from 'highlight.js/lib/core';
 	import cpp from 'highlight.js/lib/languages/cpp';
+	import 'remixicon/fonts/remixicon.css';
+	import type { Snippet } from 'svelte';
+	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
-	import SettingBlock from '$lib/components/block/SettingBlock.svelte';
-	import programMetadata, { DEFAULT_IMPLICIT_DELAY, DEFAULT_LED_PIN, DEFAULT_NUM_LEDS } from '$lib/state/programMetadata.svelte';
-	import Metadata from '$lib/components/Metadata.svelte';
+	import '../styles/highlight.css';
+	import '../styles/reset.css';
+	import '../styles/styles.css';
 
 	hljs.registerLanguage('cpp', cpp);
 
@@ -154,7 +154,7 @@
 	main {
 		display: grid;
 		grid-template-columns: 32% 68%;
-		height: calc(100lvh - 4.5rem);
+		height: calc(100lvh - 5rem);
 	}
 
 	.menu {
@@ -171,7 +171,7 @@
 		border-bottom: 8px solid hsl(0, 0%, 60%);
 
 		box-sizing: border-box;
-		height: calc(100lvh - 4.5rem);
+		height: calc(100lvh - 5rem);
 	}
 
     /* width */

@@ -136,7 +136,7 @@
 		display: flex;
 		flex-direction: column;
 		padding: 1rem;
-		height: calc(100lvh - 4.5rem);
+		height: calc(100lvh - 5rem);
 		overflow-y: auto;
 		box-sizing: border-box;
 
