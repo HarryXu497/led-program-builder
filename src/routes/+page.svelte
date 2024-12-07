@@ -38,6 +38,11 @@
 			}
 		}
 
+        // Insert a FastLED.show() command if the last command is not a delay
+        if (!(sourceCode[sourceCode.length - 1] instanceof DelayBlockModel)) {
+            showPositions.push(sourceCode.length);
+        }
+
 		for (let i = showPositions.length - 1; i >= 0; i--) {
 			sourceCode.splice(showPositions[i], 0, new ShowBlockModel());
 		}
@@ -59,8 +64,6 @@
 
 	async function onTranspile() {
 		const sourceCode = transformSource();
-
-		sourceCode.forEach((block) => (block.errorMessage = null));
 
 		let transpiledCode = sourceCode.map(attemptTranspilation);
 
@@ -125,7 +128,7 @@
 	onmouseup={() => (runButtonClicked = false)}
 	onclick={onTranspile}
 >
-	run
+	Run
 </button>
 
 <style>

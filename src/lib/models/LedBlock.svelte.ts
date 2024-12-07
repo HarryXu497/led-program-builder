@@ -25,23 +25,23 @@ class LedBlockModel extends BlockModel<4> {
 
 		// LED Red
 		if (isNaN(ledRed) || !Number.isInteger(ledRed)) {
-			throw Error('Red value must be an integer between 1 and 255.');
+			throw Error('Red value must be an integer between 0 and 255.');
 		} else if (ledRed < 0 || ledRed > 255) {
-			throw Error('Red value must be an integer between 1 and 255.');
+			throw Error('Red value must be an integer between 0 and 255.');
 		}
 
 		// LED Green
 		if (isNaN(ledGreen) || !Number.isInteger(ledGreen)) {
-			throw Error('Green value must be an integer between 1 and 255.');
+			throw Error('Green value must be an integer between 0 and 255.');
 		} else if (ledGreen < 0 || ledGreen > 255) {
-			throw Error('Green value must be an integer between 1 and 255.');
+			throw Error('Green value must be an integer between 0 and 255.');
 		}
 
 		// LED Blue
 		if (isNaN(ledBlue) || !Number.isInteger(ledBlue)) {
-			throw Error('Blue value must be an integer between 1 and 255.');
+			throw Error('Blue value must be an integer between 0 and 255.');
 		} else if (ledBlue < 0 || ledBlue > 255) {
-			throw Error('Blue value must be an integer between 1 and 255.');
+			throw Error('Blue value must be an integer between 0 and 255.');
 		}
 
 		return `leds[${ledPosition - 1}] = CRGB(${ledRed}, ${ledGreen}, ${ledBlue});`;

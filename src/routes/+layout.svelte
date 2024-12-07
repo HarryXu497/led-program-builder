@@ -64,7 +64,7 @@
 
 <header>
 	<nav>
-		<ul>
+		<ul class="logo">
 			<li>LED Program Builder</li>
 		</ul>
 	</nav>
@@ -130,6 +130,11 @@
     header {
         display: flex;
         flex-direction: row;
+    }
+
+    .logo li {
+        font-weight: bold;
+        font-size: 2rem;
     }
 
     .settings {
