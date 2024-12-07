@@ -165,6 +165,26 @@
 		height: calc(100lvh - 4.5rem);
 	}
 
+    /* width */
+    .menu::-webkit-scrollbar {
+        width: 0.375rem;
+    }
+
+    /* Track */
+    .menu::-webkit-scrollbar-track {
+        background: hsl(0, 0%, 70%);
+    }
+    
+    /* Handle */
+    .menu::-webkit-scrollbar-thumb {
+        background: hsl(0, 0%, 50%);
+    }
+
+    /* Handle on hover */
+    .menu::-webkit-scrollbar-thumb:hover {
+        background: hsl(0, 0%, 60%);
+    }
+
 	.menu .blocks {
 		display: flex;
 		flex-direction: column;
@@ -245,6 +265,26 @@
 		height: 100%;
 		overflow: auto;
 	}
+
+    /* width */
+    .output code::-webkit-scrollbar {
+        width: 0.25rem;
+    }
+
+    /* Track */
+    .output code::-webkit-scrollbar-track {
+        background: hsl(220, 13%, 12%);
+    }
+    
+    /* Handle */
+    .output code::-webkit-scrollbar-thumb {
+        background: hsl(220, 13%, 38%);
+    }
+
+    /* Handle on hover */
+    .output code::-webkit-scrollbar-thumb:hover {
+        background: hsl(220, 13%, 45%); 
+    }
 
 	nav {
 		padding: 0.75rem 1.5rem;

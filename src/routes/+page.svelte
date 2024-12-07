@@ -146,6 +146,25 @@
 		border-right: 8px solid hsl(0, 0%, 70%);
 		border-bottom: 8px solid hsl(0, 0%, 70%);
 	}
+    /* width */
+    .program-wrapper::-webkit-scrollbar {
+        width: 0.375rem;
+    }
+
+    /* Track */
+    .program-wrapper::-webkit-scrollbar-track {
+        background: hsl(0, 0%, 80%);
+    }
+    
+    /* Handle */
+    .program-wrapper::-webkit-scrollbar-thumb {
+        background: hsl(0, 0%, 90%);
+    }
+
+    /* Handle on hover */
+    .program-wrapper::-webkit-scrollbar-thumb:hover {
+        background: hsl(0, 0%, 100%);
+    }
 	.program {
 		display: flex;
 		flex-direction: column;
