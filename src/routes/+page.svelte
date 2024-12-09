@@ -65,6 +65,8 @@
 	async function onTranspile() {
 		const sourceCode = transformSource();
 
+        sourceCode.forEach(block => block.errorMessage = null);
+
 		let transpiledCode = sourceCode.map(attemptTranspilation);
 
 		if (transpiledCode.some((code) => code === null)) {
