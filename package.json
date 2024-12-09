@@ -10,7 +10,7 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-        "deploy": "npm run build && npx gh-pages -d build -t true"
+		"deploy": "npm run build && npx gh-pages -d build -t true"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.3",
@@ -25,7 +25,7 @@
 		"globals": "^15.0.0",
 		"prettier": "^3.3.2",
 		"prettier-plugin-svelte": "^3.2.6",
-		"svelte": "^5.0.0",
+		"svelte": "^5.9.0",
 		"svelte-check": "^4.0.0",
 		"svelte-dnd-action": "^0.9.52",
 		"typescript": "^5.0.0",
