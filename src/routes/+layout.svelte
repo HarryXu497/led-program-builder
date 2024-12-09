@@ -153,7 +153,7 @@
 
 	main {
 		display: grid;
-		grid-template-columns: 32% 68%;
+		grid-template-columns: 35% 65%;
 		height: calc(100lvh - 5rem);
 	}
 
