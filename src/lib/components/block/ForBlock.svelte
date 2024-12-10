@@ -8,6 +8,8 @@
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 	import DelayBlock from './DelayBlock.svelte';
 	import LedBlock from './LedBlock.svelte';
+	import ResetBlockModel from '$lib/models/ResetBlock.svelte';
+	import ResetBlock from './ResetBlock.svelte';
 
 	interface Props {
 		model: ForBlockModel;
@@ -70,6 +72,9 @@
                     {/if}
                     {#if block instanceof ForBlockModel}
                         <ForBlock model={block} {onDelete}/>
+                    {/if}
+                    {#if block instanceof ResetBlockModel}
+                        <ResetBlock {onDelete}/>
                     {/if}
                 </div>
             {/each}
