@@ -25,7 +25,7 @@
 	errorMessage={model.errorMessage}
 >
 	set LED
-	<input type="number" bind:value={model.values[0]} min="1" max={programMetadata.numLeds}/>
+	<input type="text" bind:value={model.values[0]}/>
 	to color
 	<input type="number" bind:value={model.values[1]} min="0" max="255"/>
 	<input type="number" bind:value={model.values[2]} min="0" max="255"/>

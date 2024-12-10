@@ -6,7 +6,7 @@ class DelayBlockModel extends BlockModel<1> {
 		super(1, initialValues);
 	}
 
-	transpile(): string {
+	transpile(namespace: Set<string>): string[] {
 		const delayMs = this.values[0] === '' ? NaN : Number(this.values[0]);
 
 		// LED Position
@@ -16,7 +16,7 @@ class DelayBlockModel extends BlockModel<1> {
 			throw Error('LED delay must be an integer larger than 0.');
 		}
 
-		return `delay(${delayMs});`;
+		return [`delay(${delayMs});`];
 	}
 }
 

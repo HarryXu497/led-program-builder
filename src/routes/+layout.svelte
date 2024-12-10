@@ -16,6 +16,8 @@
 	import '../styles/highlight.css';
 	import '../styles/reset.css';
 	import '../styles/styles.css';
+	import ForBlockModel from '$lib/models/ForBlock.svelte';
+	import ForBlock from '$lib/components/block/ForBlock.svelte';
 
 	hljs.registerLanguage('cpp', cpp);
 
@@ -31,6 +33,7 @@
 
 	let ledBlocks = $state([new LedBlockModel()]);
 	let delayBlocks = $state([new DelayBlockModel()]);
+	let forBlocks = $state([new ForBlockModel()]);
 
 	function handleDelayDndConsider(e: CustomEvent<DndEvent<(typeof delayBlocks)[number]>>) {
 		delayBlocks = e.detail.items;
@@ -48,6 +51,15 @@
 	function handleLedDndFinalize(e: CustomEvent<DndEvent<(typeof ledBlocks)[number]>>) {
 		ledBlocks = e.detail.items;
 		ledBlocks = [new LedBlockModel()];
+	}
+
+    function handleForDndConsider(e: CustomEvent<DndEvent<(typeof forBlocks)[number]>>) {
+		forBlocks = e.detail.items;
+	}
+
+	function handleForDndFinalize(e: CustomEvent<DndEvent<(typeof forBlocks)[number]>>) {
+		forBlocks = e.detail.items;
+		forBlocks = [new ForBlockModel()];
 	}
 
 	function copyToClipboard() {
@@ -117,6 +129,21 @@
 					</div>
 				{/each}
 			</section>
+            <section
+                class="menu-blocks"
+                use:dndzone={{ items: forBlocks, flipDurationMs: 300 }}
+                onconsider={handleForDndConsider}
+                onfinalize={handleForDndFinalize}
+            >
+                {#each forBlocks as block (block.id)}
+                    <div class="block-wrapper" animate:flip={{ duration: 300 }}>
+                        <!-- Don't know why this if statement is needed but it makes it work :) -->
+                        {#if block instanceof ForBlockModel}
+                            <ForBlock model={block} />
+                        {/if}
+                    </div>
+                {/each}
+            </section>
 		</div>
 		<div class="output">
 			<h2>Output</h2>
@@ -253,7 +280,7 @@
 	}
 
 	.output pre {
-		flex-basis: 40lvh;
+		flex-basis: 20lvh;
 		flex-grow: 1;
 		padding: 0.25rem;
 		line-height: 1.4;

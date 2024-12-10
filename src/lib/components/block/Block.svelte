@@ -16,7 +16,7 @@
 <div class="block">
 	<div class="code-block">
 		<form>
-			{@render children()}
+			<div class="children-wrapper">{@render children()}</div>
 			{#if onDelete}
 				<button
 					class="delete"
@@ -33,7 +33,7 @@
 	</div>
 	{#if errorMessage}
 		<div class="error-block" transition:fade={{ duration: 100 }}>
-			{errorMessage}
+			<p>{errorMessage}</p>
 		</div>
 	{/if}
 </div>
@@ -101,9 +101,9 @@
 		margin: 0;
 	}
 
-	:global(.code-block input[type='number']) {
+	:global(.code-block input) {
 		border: none;
-		width: 3rem;
+		width: 2rem;
 		text-align: center;
 		border-radius: 1rem;
 		padding: 0.25rem;
@@ -115,7 +115,16 @@
 		white-space: nowrap;
 		display: flex;
 		flex-direction: row;
-		align-items: center;
+		align-items: flex-start;
 		gap: 0.25rem;
 	}
+
+    .children-wrapper {
+        font-size: 1rem;
+		white-space: nowrap;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 0.25rem;
+    }
 </style>

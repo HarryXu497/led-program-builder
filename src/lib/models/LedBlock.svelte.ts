@@ -7,21 +7,32 @@ class LedBlockModel extends BlockModel<4> {
 		super(4, initialValues);
 	}
 
-	transpile(): string {
-		const numericalValues = this.values.map((value) =>
+	transpile(namespace: Set<string>): string[] {
+		const numericalValues = this.values.slice(1).map((value) =>
 			value === '' ? NaN : Number(value)
-		) as Tuple<number, 4>;
-		const ledPosition = numericalValues[0];
-		const ledRed = numericalValues[1];
-		const ledGreen = numericalValues[2];
-		const ledBlue = numericalValues[3];
+		) as Tuple<number, 3>;
+		let ledPosition = this.values[0].trim();
+        const ledPositionAsNumber = Number(ledPosition);
 
-		// LED Position
-		if (isNaN(ledPosition) || !Number.isInteger(ledPosition)) {
-			throw Error(`LED position must be an integer between 1 and ${programMetadata.numLeds}.`);
-		} else if (ledPosition < 1 || ledPosition > programMetadata.numLeds) {
-			throw Error(`LED position must be an integer between 1 and ${programMetadata.numLeds}.`);
-		}
+		const ledRed = numericalValues[0];
+		const ledGreen = numericalValues[1];
+		const ledBlue = numericalValues[2];
+
+        if (!isNaN(ledPositionAsNumber)) {
+            // Literal integer
+            if (isNaN(ledPositionAsNumber) || !Number.isInteger(ledPositionAsNumber)) {
+                throw Error(`LED must be an integer between 1 and ${programMetadata.numLeds}.`);
+            } else if (ledPositionAsNumber < 1 || ledPositionAsNumber > programMetadata.numLeds) {
+                throw Error(`LED must be an integer between 1 and ${programMetadata.numLeds}.`);
+            }
+
+            ledPosition = (ledPositionAsNumber - 1).toString();
+        } else {
+            // Variable
+            if (!namespace.has(ledPosition)) {
+                throw Error(`Variable '${ledPosition}' does not exist.`)
+            }
+        }
 
 		// LED Red
 		if (isNaN(ledRed) || !Number.isInteger(ledRed)) {
@@ -44,7 +55,7 @@ class LedBlockModel extends BlockModel<4> {
 			throw Error('Blue value must be an integer between 0 and 255.');
 		}
 
-		return `leds[${ledPosition - 1}] = CRGB(${ledRed}, ${ledGreen}, ${ledBlue});`;
+		return [`leds[${ledPosition}] = CRGB(${ledRed}, ${ledGreen}, ${ledBlue});`];
 	}
 }
 

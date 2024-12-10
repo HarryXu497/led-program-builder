@@ -1,14 +1,15 @@
 <script lang="ts">
 	import DelayBlock from '$lib/components/block/DelayBlock.svelte';
+	import ForBlock from '$lib/components/block/ForBlock.svelte';
 	import LedBlock from '$lib/components/block/LedBlock.svelte';
 	import StartBlock from '$lib/components/block/StartBlock.svelte';
 	import BlockModel from '$lib/models/Block.svelte';
 	import DelayBlockModel from '$lib/models/DelayBlock.svelte';
+	import ForBlockModel from '$lib/models/ForBlock.svelte';
 	import LedBlockModel from '$lib/models/LedBlock.svelte';
-	import ShowBlockModel from '$lib/models/ShowBlock.svelte';
-	import programMetadata from '$lib/state/programMetadata.svelte';
 	import transpilationOutput from '$lib/state/transpilationOutput.svelte';
 	import buildProgram from '$lib/transpile/buildProgram';
+	import transpile from '$lib/transpile/transpile';
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
 
@@ -18,62 +19,15 @@
 
 	let blocks = $state<BlockModel[]>([]);
 
-	function transformSource() {
-		const sourceCode = [...blocks];
-
-		// Edge case: no delays => insert a delay
-		if (sourceCode.every((block) => !(block instanceof DelayBlockModel))) {
-			sourceCode.push(new DelayBlockModel([programMetadata.implicitDelay.toString()]));
-		}
-
-		const showPositions: number[] = [];
-
-		// Insert a FastLED.show() command before a delay
-		for (let i = 1; i < sourceCode.length; i++) {
-			const currentBlock = sourceCode[i];
-			const previousBlock = sourceCode[i - 1];
-
-			if (currentBlock instanceof DelayBlockModel && !(previousBlock instanceof DelayBlockModel)) {
-				showPositions.push(i);
-			}
-		}
-
-        // Insert a FastLED.show() command if the last command is not a delay
-        if (!(sourceCode[sourceCode.length - 1] instanceof DelayBlockModel)) {
-            showPositions.push(sourceCode.length);
+	function onTranspile() {
+        try {
+            const output = transpile(blocks);
+            
+            transpilationOutput.value = buildProgram(output.join("\n"));
+        } catch (e) {
+            console.log(e)
+            return;
         }
-
-		for (let i = showPositions.length - 1; i >= 0; i--) {
-			sourceCode.splice(showPositions[i], 0, new ShowBlockModel());
-		}
-
-		return sourceCode;
-	}
-
-	function attemptTranspilation(block: BlockModel) {
-		try {
-			return block.transpile();
-		} catch (e: unknown) {
-			if (e instanceof Error) {
-				block.errorMessage = e.message;
-			}
-
-			return null;
-		}
-	}
-
-	async function onTranspile() {
-		const sourceCode = transformSource();
-
-        sourceCode.forEach(block => block.errorMessage = null);
-
-		let transpiledCode = sourceCode.map(attemptTranspilation);
-
-		if (transpiledCode.some((code) => code === null)) {
-			return;
-		}
-
-		transpilationOutput.value = buildProgram(transpiledCode.join('\n    '));
 	}
 
 	function handleDndConsider(e: CustomEvent<DndEvent<(typeof blocks)[number]>>) {
@@ -113,11 +67,14 @@
 			{@const onDelete = () => blocks.splice(i, 1)}
 			<div class="block-wrapper" animate:flip={{ duration: 300 }}>
 				{#if block instanceof LedBlockModel}
-					<LedBlock model={block} {onDelete} />
+					<LedBlock model={block} {onDelete}/>
 				{/if}
 				{#if block instanceof DelayBlockModel}
-					<DelayBlock model={block} {onDelete} />
+					<DelayBlock model={block} {onDelete}/>
 				{/if}
+                {#if block instanceof ForBlockModel}
+                    <ForBlock model={block} {onDelete}/>
+                {/if}
 			</div>
 		{/each}
 	</div>
@@ -148,6 +105,11 @@
 		border-right: 8px solid hsl(0, 0%, 70%);
 		border-bottom: 8px solid hsl(0, 0%, 70%);
 	}
+
+    .program {
+        padding-bottom: 8rem;
+    }
+
     /* width */
     .program-wrapper::-webkit-scrollbar {
         width: 0.375rem;
@@ -172,8 +134,10 @@
 		flex-direction: column;
 		flex-grow: 1;
 	}
-	.program.expand {
+    .program.expand {
 		gap: 0.5rem;
+
+        padding-bottom: 45px;
 	}
 	.transpile-button {
 		all: unset;

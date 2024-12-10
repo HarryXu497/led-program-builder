@@ -29,7 +29,7 @@ abstract class BlockModel<N extends number = number> {
 		this._errorMessage = newMessage;
 	}
 
-	abstract transpile(): string;
+	abstract transpile(namespace: Set<string>): string[];
 }
 
 export default BlockModel;

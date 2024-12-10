@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-    ${loopCode}
+${loopCode}
 }
 `.trim();
 }

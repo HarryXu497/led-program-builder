@@ -5,8 +5,8 @@ class ShowBlockModel extends BlockModel<0> {
 		super(0);
 	}
 
-	transpile(): string {
-		return 'FastLED.show();';
+	transpile(namespace: Set<string>): string[] {
+		return ['FastLED.show();'];
 	}
 }
 
