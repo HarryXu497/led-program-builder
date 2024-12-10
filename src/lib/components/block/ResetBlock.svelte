@@ -14,7 +14,7 @@
     --color-code-block-dark="hsl(228, 66%, 48%)"
     {onDelete}
 >
-	<p>Reset all LEDs</p>
+	<p>reset all LEDs</p>
 </Block>
 
 <style>
