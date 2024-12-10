@@ -75,21 +75,15 @@ class ForBlockModel extends BlockModel<4> {
 
         namespace.delete(varName);
 
-        console.log([
-            `for (int ${varName} = ${from}; ${varName} <= ${to}; step += ${step}) {`,
-            ...blockOutput,
-            "}",
-        ])
-
         if (step >= 0) {
             return [
-                `for (int ${varName} = ${from}; ${varName} <= ${to}; step += ${step}) {`,
+                `for (int ${varName} = ${from}; ${varName} <= ${to}; ${varName} += ${step}) {`,
                 ...blockOutput,
                 "}",
             ];
         } else {
             return [
-                `for (int ${varName} = ${from}; ${varName} >= ${to}; step += ${step}) {`,
+                `for (int ${varName} = ${from}; ${varName} >= ${to}; ${varName} += ${step}) {`,
                 ...blockOutput,
                 "}",
             ];

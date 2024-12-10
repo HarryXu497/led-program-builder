@@ -18,6 +18,8 @@
 	import '../styles/styles.css';
 	import ForBlockModel from '$lib/models/ForBlock.svelte';
 	import ForBlock from '$lib/components/block/ForBlock.svelte';
+	import ResetBlockModel from '$lib/models/ResetBlock.svelte';
+	import ResetBlock from '$lib/components/block/ResetBlock.svelte';
 
 	hljs.registerLanguage('cpp', cpp);
 
@@ -34,6 +36,7 @@
 	let ledBlocks = $state([new LedBlockModel()]);
 	let delayBlocks = $state([new DelayBlockModel()]);
 	let forBlocks = $state([new ForBlockModel()]);
+    let resetBlocks = $state([new ResetBlockModel()]);
 
 	function handleDelayDndConsider(e: CustomEvent<DndEvent<(typeof delayBlocks)[number]>>) {
 		delayBlocks = e.detail.items;
@@ -60,6 +63,15 @@
 	function handleForDndFinalize(e: CustomEvent<DndEvent<(typeof forBlocks)[number]>>) {
 		forBlocks = e.detail.items;
 		forBlocks = [new ForBlockModel()];
+	}
+
+    function handleResetDndConsider(e: CustomEvent<DndEvent<(typeof resetBlocks)[number]>>) {
+		resetBlocks = e.detail.items;
+	}
+
+	function handleResetDndFinalize(e: CustomEvent<DndEvent<(typeof resetBlocks)[number]>>) {
+		resetBlocks = e.detail.items;
+		resetBlocks = [new ResetBlockModel()];
 	}
 
 	function copyToClipboard() {
@@ -114,6 +126,21 @@
 					</div>
 				{/each}
 			</section>
+            <section
+                class="menu-blocks"
+                use:dndzone={{ items: resetBlocks, flipDurationMs: 300 }}
+                onconsider={handleResetDndConsider}
+                onfinalize={handleResetDndFinalize}
+            >
+                {#each resetBlocks as block (block.id)}
+                    <div class="block-wrapper" animate:flip={{ duration: 300 }}>
+                        <!-- Don't know why this if statement is needed but it makes it work :) -->
+                        {#if block instanceof ResetBlockModel}
+                            <ResetBlock/>
+                        {/if}
+                    </div>
+                {/each}
+            </section>
 			<section
 				class="menu-blocks"
 				use:dndzone={{ items: delayBlocks, flipDurationMs: 300 }}

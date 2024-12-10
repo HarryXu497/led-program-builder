@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type LedBlockModel from '$lib/models/LedBlock.svelte';
-	import programMetadata from '$lib/state/programMetadata.svelte';
 	import Block from './Block.svelte';
 
 	interface Props {

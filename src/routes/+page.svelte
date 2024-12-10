@@ -2,11 +2,13 @@
 	import DelayBlock from '$lib/components/block/DelayBlock.svelte';
 	import ForBlock from '$lib/components/block/ForBlock.svelte';
 	import LedBlock from '$lib/components/block/LedBlock.svelte';
+	import ResetBlock from '$lib/components/block/ResetBlock.svelte';
 	import StartBlock from '$lib/components/block/StartBlock.svelte';
 	import BlockModel from '$lib/models/Block.svelte';
 	import DelayBlockModel from '$lib/models/DelayBlock.svelte';
 	import ForBlockModel from '$lib/models/ForBlock.svelte';
 	import LedBlockModel from '$lib/models/LedBlock.svelte';
+	import ResetBlockModel from '$lib/models/ResetBlock.svelte';
 	import transpilationOutput from '$lib/state/transpilationOutput.svelte';
 	import buildProgram from '$lib/transpile/buildProgram';
 	import transpile from '$lib/transpile/transpile';
@@ -75,6 +77,9 @@
                 {#if block instanceof ForBlockModel}
                     <ForBlock model={block} {onDelete}/>
                 {/if}
+                {#if block instanceof ResetBlockModel}
+                    <ResetBlock {onDelete}/>
+                {/if}  
 			</div>
 		{/each}
 	</div>

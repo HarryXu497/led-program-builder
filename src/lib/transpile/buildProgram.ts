@@ -9,6 +9,12 @@ function buildProgram(loopCode: string) {
 
 CRGB leds[NUM_LEDS];
 
+void reset() {
+    for (int i = 0; i < NUM_LEDS; i++) {
+        leds[i] = CRGB(0, 0, 0);
+    }
+}
+
 void setup() {
     FastLED.addLeds<WS2812, LED_PIN, GRB>(
         leds,
