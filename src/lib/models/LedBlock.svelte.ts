@@ -32,6 +32,8 @@ class LedBlockModel extends BlockModel<4> {
             if (!namespace.has(ledPosition)) {
                 throw Error(`Variable '${ledPosition}' does not exist.`)
             }
+
+            ledPosition = `${ledPosition} - 1`;
         }
 
 		// LED Red
