@@ -101,7 +101,10 @@
 		margin: 0;
 	}
 
-	:global(.code-block input) {
+	:global(
+        .code-block input[type="text"],
+        .code-block input[type="number"]
+    ) {
 		border: none;
 		width: 2rem;
 		text-align: center;
