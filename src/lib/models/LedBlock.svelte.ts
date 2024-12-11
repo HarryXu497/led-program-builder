@@ -57,7 +57,7 @@ class LedBlockModel extends BlockModel<4> {
 			throw Error('Blue value must be an integer between 0 and 255.');
 		}
 
-		return [`leds[${ledPosition}] = CRGB(${ledRed}, ${ledGreen}, ${ledBlue});`];
+		return [`setLED(${ledPosition}, ${ledRed}, ${ledGreen}, ${ledBlue});`];
 	}
 }
 

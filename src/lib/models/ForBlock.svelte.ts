@@ -14,13 +14,14 @@ class ForBlockModel extends BlockModel<4> {
 	}
 
 	transpile(namespace: Set<string>): string[] {
-		const numericalValues = this.values.slice(1).map((value) =>
-			value === '' ? NaN : Number(value)
-		) as Tuple<number, 3>;
 		const varName = this.values[0].trim();
-		const from = numericalValues[0];
-		const to = numericalValues[1];
-		const step = numericalValues[2];
+		let from = this.values[1].trim();
+		let to = this.values[2].trim();
+		let step = this.values[3].trim();
+
+        const fromAsNumber = Number(from);
+		const toAsNumber = Number(to);
+		const stepAsNumber = Number(step);
 
 		// Variable name
 		if (varName.length === 0) {
@@ -35,35 +36,61 @@ class ForBlockModel extends BlockModel<4> {
             throw Error(`Variable '${varName}' already exists.`);
         }
 
-		// From
-		if (isNaN(from) || !Number.isInteger(from)) {
-			throw Error('From must be an non-negative integer.');
-		} else if (from < 0) {
-			throw Error('From must be an non-negative integer.');
-		}
+        // From
+        if (!isNaN(fromAsNumber)) {
+            // Literal integer
+            if (isNaN(fromAsNumber) || !Number.isInteger(fromAsNumber)) {
+                throw Error('From must be an non-negative integer.');
+            } else if (fromAsNumber < 0) {
+                throw Error('From must be an non-negative integer.');
+            }
+        } else {
+            // Variable
+            if (!namespace.has(from)) {
+                throw Error(`Variable '${from}' does not exist.`)
+            }
+        }
 
 		// To
-		if (isNaN(to) || !Number.isInteger(to)) {
-			throw Error('To must be an non-negative integer.');
-		} else if (to < 0) {
-			throw Error('To must be an non-negative integer.');
-		}
-
-		// Step
-		if (isNaN(step) || !Number.isInteger(step)) {
-			throw Error('Step must be an integer.');
-		}
-
-        if (from <= to && step < 0) {
-            throw Error("Infinite loop.");
+        if (!isNaN(toAsNumber)) {
+            // Literal integer
+            if (isNaN(toAsNumber) || !Number.isInteger(toAsNumber)) {
+                throw Error('To must be an non-negative integer.');
+            } else if (toAsNumber < 0) {
+                throw Error('To must be an non-negative integer.');
+            }
+        } else {
+            // Variable
+            if (!namespace.has(to)) {
+                throw Error(`Variable '${to}' does not exist.`)
+            }
         }
 
-        if (from >= to && step > 0) {
-            throw Error("Infinite loop.");
+        // Step
+        if (!isNaN(stepAsNumber)) {
+            // Literal integer
+            if (isNaN(stepAsNumber) || !Number.isInteger(stepAsNumber)) {
+                throw Error('Step must be an integer.');
+            }
+        } else {
+            // Variable
+            if (!namespace.has(step)) {
+                throw Error(`Variable '${step}' does not exist.`)
+            }
         }
 
-        if (step === 0) {
-            throw Error("Infinite loop.");
+        if (!isNaN(fromAsNumber) && !isNaN(toAsNumber) && !isNaN(stepAsNumber)) {
+            if (fromAsNumber <= toAsNumber && stepAsNumber < 0) {
+                throw Error("Infinite loop.");
+            }
+            
+            if (fromAsNumber >= toAsNumber && stepAsNumber > 0) {
+                throw Error("Infinite loop.");
+            }
+            
+            if (stepAsNumber === 0) {
+                throw Error("Infinite loop.");
+            }
         }
 
         namespace.add(varName);
@@ -75,20 +102,38 @@ class ForBlockModel extends BlockModel<4> {
 
         namespace.delete(varName);
 
-        if (step >= 0) {
-            return [
-                `for (int ${varName} = ${from}; ${varName} <= ${to}; ${varName} += ${step}) {`,
-                ...blockOutput,
-                "}",
-            ];
+        if (!isNaN(stepAsNumber)) {
+            // Step is a number literal
+            if (stepAsNumber >= 0) {
+                return [
+                    `for (int ${varName} = ${from}; ${varName} <= ${to}; ${varName} += ${step}) {`,
+                    ...blockOutput,
+                    "}",
+                ];
+            } else {
+                return [
+                    `for (int ${varName} = ${from}; ${varName} >= ${to}; ${varName} += ${step}) {`,
+                    ...blockOutput,
+                    "}",
+                ];
+            }
         } else {
-            return [
-                `for (int ${varName} = ${from}; ${varName} >= ${to}; ${varName} += ${step}) {`,
-                ...blockOutput,
-                "}",
-            ];
+            // Step is a variable; 
+            if (fromAsNumber <= toAsNumber) {
+                return [
+                    `for (int ${varName} = ${from}; ${varName} <= ${to}; ${varName} += ${step}) {`,
+                    ...blockOutput,
+                    "}",
+                ];
+            } else {
+                return [
+                    `for (int ${varName} = ${from}; ${varName} >= ${to}; ${varName} += ${step}) {`,
+                    ...blockOutput,
+                    "}",
+                ];
+            }
         }
-	}
+    }
 }
 
 export default ForBlockModel;

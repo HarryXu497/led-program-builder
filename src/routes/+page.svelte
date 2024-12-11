@@ -27,7 +27,6 @@
             
             transpilationOutput.value = buildProgram(output.join("\n"));
         } catch (e) {
-            console.log(e)
             return;
         }
 	}

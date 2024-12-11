@@ -71,10 +71,6 @@ function transpile(blocks: BlockModel[], namespace?: Set<string>, options: Trans
         }
     });
 
-    console.log(blocks)
-    console.log(transpiledCode)
-
-
     if (transpiledCode.some((code) => code === null)) {
         throw Error("");
     }

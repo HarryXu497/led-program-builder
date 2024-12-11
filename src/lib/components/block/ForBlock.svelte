@@ -48,11 +48,11 @@
                 for
                 <input type="text" bind:value={model.values[0]}/>
                     from
-                <input type="number" bind:value={model.values[1]}/>
+                <input type="text" bind:value={model.values[1]}/>
                     to
-                <input type="number" bind:value={model.values[2]}/>
+                <input type="text" bind:value={model.values[2]}/>
                     step
-                <input type="number" bind:value={model.values[3]}/>
+                <input type="text" bind:value={model.values[3]}/>
             </div>
         <div
             class="program"
