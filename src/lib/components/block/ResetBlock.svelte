@@ -9,9 +9,9 @@
 </script>
 
 <Block
-    --color-code-block="hsl(228, 66%, 58%)"
-    --color-code-block-light="hsl(228, 66%, 68%)"
-    --color-code-block-dark="hsl(228, 66%, 48%)"
+    --color-code-block="var(--color-led)"
+    --color-code-block-light="var(--color-led-light)"
+    --color-code-block-dark="var(--color-led-dark)"
     {onDelete}
 >
 	<p>reset all LEDs</p>

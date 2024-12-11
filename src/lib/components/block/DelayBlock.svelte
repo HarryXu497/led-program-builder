@@ -11,9 +11,9 @@
 </script>
 
 <Block
-	--color-code-block="hsl(271, 59%, 55%)"
-	--color-code-block-light="hsl(271, 59%, 65%)"
-	--color-code-block-dark="hsl(271, 59%, 45%)"
+	--color-code-block="var(--color-delay)"
+	--color-code-block-light="var(--color-delay-light)"
+	--color-code-block-dark="var(--color-delay-dark)"
 	{onDelete}
 	errorMessage={model.errorMessage}
 >

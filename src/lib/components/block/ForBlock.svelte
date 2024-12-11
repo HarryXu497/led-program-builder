@@ -37,9 +37,9 @@
 </script>
 
 <Block
-	--color-code-block="hsl(31, 90%, 50%)"
-	--color-code-block-light="hsl(31, 90%, 60%)"
-	--color-code-block-dark="hsl(31, 90%, 40%)"
+	--color-code-block="var(--color-for)"
+	--color-code-block-light="var(--color-for-light)"
+	--color-code-block-dark="var(--color-for-dark)"
 	{onDelete}
 	errorMessage={model.errorMessage}
 >
@@ -107,10 +107,10 @@
 
         transition: padding 0.35s ease;
 
-        background-color: hsl(31, 90%, 45%);
-		border-left: 8px solid hsl(31, 90%, 40%);
-		border-top: 8px solid hsl(31, 90%, 40%);
-		border-right: 8px solid hsl(31, 90%, 60%);
-		border-bottom: 8px solid hsl(31, 90%, 60%);
+        background-color: var(--color-for-blocks);
+		border-left: 8px solid var(--color-for-dark);
+		border-top: 8px solid var(--color-for-dark);
+		border-right: 8px solid var(--color-for-light);
+		border-bottom: 8px solid var(--color-for-light);
     }
 </style>

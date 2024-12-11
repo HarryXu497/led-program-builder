@@ -70,7 +70,7 @@
 		border-left: var(--border-width, 5px) solid var(--color-code-block-light);
 		border-right: var(--border-width, 5px) solid var(--color-code-block-dark);
 		border-bottom: var(--border-width, 5px) solid var(--color-code-block-dark);
-		color: hsl(0, 0%, 95%);
+        color: var(--text-color, hsl(0, 0%, 98%));
 
 		padding: 0.25rem 0.5rem;
 

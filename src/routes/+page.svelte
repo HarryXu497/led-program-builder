@@ -103,11 +103,11 @@
 		overflow-y: auto;
 		box-sizing: border-box;
 
-		background-color: hsl(0, 0%, 80%);
-		border-left: 8px solid hsl(0, 0%, 90%);
-		border-top: 8px solid hsl(0, 0%, 90%);
-		border-right: 8px solid hsl(0, 0%, 70%);
-		border-bottom: 8px solid hsl(0, 0%, 70%);
+		background-color:  hsl(204, 40%, 74%);
+		border-left: 8px solid hsl(204, 40%, 84%);
+		border-top: 8px solid hsl(204, 40%, 84%);
+		border-right: 8px solid hsl(204, 40%, 64%);
+		border-bottom: 8px solid hsl(204, 40%, 64%);
 	}
 
     .program {
@@ -116,23 +116,25 @@
 
     /* width */
     .program-wrapper::-webkit-scrollbar {
-        width: 0.375rem;
+        width: 0.5rem;
+        height: 0.5rem;
     }
 
     /* Track */
     .program-wrapper::-webkit-scrollbar-track {
-        background: hsl(0, 0%, 80%);
+        background: var(--color-bg-3-track);
     }
     
     /* Handle */
     .program-wrapper::-webkit-scrollbar-thumb {
-        background: hsl(0, 0%, 90%);
+        background: var(--color-bg-3-light);
     }
 
     /* Handle on hover */
     .program-wrapper::-webkit-scrollbar-thumb:hover {
-        background: hsl(0, 0%, 100%);
+        background: var(--color-bg-3-thumb-hover);
     }
+
 	.program {
 		display: flex;
 		flex-direction: column;
@@ -148,11 +150,13 @@
 
 		font-family: 'Jetbrains Mono', monospace;
 		padding: 1rem 2rem;
-		background-color: hsl(125, 48%, 50%);
-		border-left: 5px solid hsl(125, 48%, 60%);
-		border-top: 5px solid hsl(125, 48%, 60%);
-		border-right: 5px solid hsl(125, 48%, 40%);
-		border-bottom: 5px solid hsl(125, 48%, 40%);
+        background-color: var(--color-bg-1);
+		box-sizing: border-box;
+
+		border-left: 5px solid var(--color-bg-1-light);
+		border-top: 5px solid var(--color-bg-1-light);
+        border-right: 5px solid var(--color-bg-1-dark);
+		border-bottom: 5px solid var(--color-bg-1-dark);
 		font-size: 2rem;
 		color: hsl(0, 0%, 98%);
 		position: absolute;
@@ -162,10 +166,10 @@
 	}
 
 	.transpile-button.clicked {
-		border-right: 5px solid hsl(125, 48%, 60%);
-		border-bottom: 5px solid hsl(125, 48%, 60%);
-		border-left: 5px solid hsl(125, 48%, 40%);
-		border-top: 5px solid hsl(125, 48%, 40%);
+		border-left: 5px solid var(--color-bg-1-dark);
+		border-top: 5px solid var(--color-bg-1-dark);
+        border-right: 5px solid var(--color-bg-1-light);
+		border-bottom: 5px solid var(--color-bg-1-light);
 	}
 
 	.transpile-button:hover {

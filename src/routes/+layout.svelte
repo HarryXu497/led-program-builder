@@ -13,13 +13,15 @@
 	import type { Snippet } from 'svelte';
 	import { dndzone, type DndEvent } from 'svelte-dnd-action';
 	import { flip } from 'svelte/animate';
-	import '../styles/highlight.css';
 	import '../styles/reset.css';
+	import '../styles/highlight.css';
+	import '../styles/theme.css';
 	import '../styles/styles.css';
 	import ForBlockModel from '$lib/models/ForBlock.svelte';
 	import ForBlock from '$lib/components/block/ForBlock.svelte';
 	import ResetBlockModel from '$lib/models/ResetBlock.svelte';
 	import ResetBlock from '$lib/components/block/ResetBlock.svelte';
+	import Light from '$lib/components/Light.svelte';
 
 	hljs.registerLanguage('cpp', cpp);
 
@@ -37,6 +39,34 @@
 	let delayBlocks = $state([new DelayBlockModel()]);
 	let forBlocks = $state([new ForBlockModel()]);
     let resetBlocks = $state([new ResetBlockModel()]);
+
+    const LIGHT_SIZE = 25;
+    const LIGHT_INTERVAL = 500;
+
+    let windowWidth = $state<number>();
+    let offset = $state<number>(0);
+
+    $effect(() => {
+        const interval = setInterval(() => offset = (offset + 1) % 2, LIGHT_INTERVAL)
+
+        return () => clearInterval(interval);
+    })
+
+    type ColorMap = Record<number, {
+        color: `hsl(${number}, ${number}%, ${number}%)`
+        glow: `hsla(${number}, ${number}%, ${number}%, ${number})`
+    }>
+
+    const COLOR_MAP: ColorMap = {
+        0: {
+            color: "hsl(0, 80%, 68%)",
+            glow: "hsla(0, 60%, 58%, 0.5)",
+        },
+        1: {
+            color: "hsl(117, 64%, 77%)",
+            glow: "hsla(117, 44%, 67%, 0.5)",
+        }
+    }
 
 	function handleDelayDndConsider(e: CustomEvent<DndEvent<(typeof delayBlocks)[number]>>) {
 		delayBlocks = e.detail.items;
@@ -83,6 +113,7 @@
 			copyButtonClicked = false;
 		}
 	}
+    
     const TITLE = "LED Program Builder";
     const DESCRIPTION = "A simple Scratch-like web interface to generate C++ code for an Arduino-controlled addressable LED strip.";
 </script>
@@ -93,7 +124,7 @@
     url="https://harryxu497.github.io/led-program-builder/"
 />
 
-<svelte:window onmouseup={onWindowMouseUp} />
+<svelte:window onmouseup={onWindowMouseUp} bind:innerWidth={windowWidth}/>
 
 <header>
 	<nav>
@@ -106,6 +137,17 @@
         <SettingBlock setting="LED Pin" bind:value={programMetadata.ledPin}/>
         <SettingBlock setting="Implicit Delay" bind:value={programMetadata.implicitDelay}/>
     </ul>
+    <div class="lights">
+        {#each { length: Math.floor(windowWidth! / LIGHT_SIZE) }, i} 
+            {@const color = COLOR_MAP[(i + offset) % 2].color}
+            {@const glow = COLOR_MAP[(i + offset) % 2].glow}
+            <Light
+                --size="{LIGHT_SIZE}px"
+                --light-color={color}
+                --light-color-glow={glow}
+            />
+        {/each}
+    </div>
 </header>
 <main>
 	<section class="menu">
@@ -193,6 +235,17 @@
     header {
         display: flex;
         flex-direction: row;
+        position: relative;
+    }
+
+    .lights {
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        left: 0;
+        right: 0;
+        bottom: 1px
     }
 
     .logo li {
@@ -216,13 +269,13 @@
 		flex-direction: column;
 		overflow-y: auto;
 		gap: 2rem;
-		background-color: hsl(0, 0%, 70%);
+		background-color: var(--color-bg-2);
 		padding: 1rem;
 
-		border-top: 8px solid hsl(0, 0%, 80%);
-		border-left: 8px solid hsl(0, 0%, 80%);
-		border-right: 8px solid hsl(0, 0%, 60%);
-		border-bottom: 8px solid hsl(0, 0%, 60%);
+		border-top: 8px solid var(--color-bg-2-light);
+		border-left: 8px solid var(--color-bg-2-light);
+		border-right: 8px solid var(--color-bg-2-dark);
+		border-bottom: 8px solid var(--color-bg-2-dark);
 
 		box-sizing: border-box;
 		height: calc(100lvh - 5rem);
@@ -235,17 +288,17 @@
 
     /* Track */
     .menu::-webkit-scrollbar-track {
-        background: hsl(0, 0%, 70%);
+        background: var(--color-bg-2-track);
     }
     
     /* Handle */
     .menu::-webkit-scrollbar-thumb {
-        background: hsl(0, 0%, 50%);
+        background: var(--color-bg-2-light);
     }
 
     /* Handle on hover */
     .menu::-webkit-scrollbar-thumb:hover {
-        background: hsl(0, 0%, 60%);
+        background: var(--color-bg-2-thumb-hover);
     }
 
 	.menu .blocks {
@@ -278,13 +331,13 @@
 	.copy {
 		all: unset;
 		color: hsl(0, 0%, 95%);
-		background-color: hsl(260, 60%, 60%);
+		background-color: var(--color-bg-1);
 		box-sizing: border-box;
 
-		border-left: 5px solid hsl(260, 60%, 70%);
-		border-top: 5px solid hsl(260, 60%, 70%);
-		border-right: 5px solid hsl(260, 60%, 50%);
-		border-bottom: 5px solid hsl(260, 60%, 50%);
+		border-left: 5px solid var(--color-bg-1-light);
+		border-top: 5px solid var(--color-bg-1-light);
+        border-right: 5px solid var(--color-bg-1-dark);
+		border-bottom: 5px solid var(--color-bg-1-dark);
 
 		padding: 1rem 0.5rem;
 
@@ -296,10 +349,10 @@
 	}
 
 	.copy.clicked {
-		border-left: 5px solid hsl(260, 60%, 50%);
-		border-top: 5px solid hsl(260, 60%, 50%);
-		border-right: 5px solid hsl(260, 60%, 70%);
-		border-bottom: 5px solid hsl(260, 60%, 70%);
+		border-left: 5px solid var(--color-bg-1-dark);
+		border-top: 5px solid var(--color-bg-1-dark);
+        border-right: 5px solid var(--color-bg-1-light);
+		border-bottom: 5px solid var(--color-bg-1-light);
 	}
 
 	.copy:hover {
@@ -332,6 +385,7 @@
     /* width */
     .output code::-webkit-scrollbar {
         width: 0.25rem;
+        height: 0.25rem;
     }
 
     /* Track */
@@ -352,16 +406,16 @@
 	nav {
 		padding: 0.75rem 1.5rem;
         flex-grow: 1;
-		background-color: hsl(0, 0%, 60%);
+		background-color: var(--color-bg-1);
 		padding: 1rem;
 		height: 100%;
 
 		box-sizing: border-box;
 
-		border-top: 8px solid hsl(0, 0%, 70%);
-		border-left: 8px solid hsl(0, 0%, 70%);
-		border-right: 8px solid hsl(0, 0%, 50%);
-		border-bottom: 8px solid hsl(0, 0%, 50%);
+		border-top: 8px solid var(--color-bg-1-light);
+		border-left: 8px solid var(--color-bg-1-light);
+		border-right: 8px solid var(--color-bg-1-dark);
+		border-bottom: 8px solid var(--color-bg-1-dark);
 
 		color: hsl(0, 0%, 95%);
 		text-transform: uppercase;

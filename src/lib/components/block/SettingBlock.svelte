@@ -10,9 +10,9 @@
 </script>
 
 <Block
-    --color-code-block="hsl(0, 0%, 60%)"
-    --color-code-block-light="hsl(0, 0%, 70%)"
-    --color-code-block-dark="hsl(0, 0%, 50%)"
+    --color-code-block="var(--color-bg-1)"
+    --color-code-block-light="var(--color-bg-1-light)"
+    --color-code-block-dark="var(--color-bg-1-dark)"
     --border-width="8px"
 >
 	{setting}

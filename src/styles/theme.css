@@ -1,0 +1,30 @@
+:root {
+    --color-bg-1: hsl(214, 33%, 40%);
+    --color-bg-1-light: hsl(214, 33%, 50%);
+    --color-bg-1-dark: hsl(214, 33%, 30%);
+
+    --color-bg-2: hsl(207, 33%, 63%);
+    --color-bg-2-light: hsl(207, 33%, 73%);
+    --color-bg-2-dark: hsl(207, 33%, 53%);
+    --color-bg-2-track: hsl(207, 33%, 83%);
+    --color-bg-2-thumb-hover: hsl(207, 33%, 75%);
+
+    --color-bg-3: hsl(214, 33%, 40%);
+    --color-bg-3-light: hsl(214, 33%, 50%);
+    --color-bg-3-dark: hsl(214, 33%, 30%);
+    --color-bg-3-track: hsl(214, 33%, 60%);
+    --color-bg-3-thumb-hover: hsl(207, 33%, 52%);
+
+    --color-led: hsl(125, 44%, 30%);
+    --color-led-light: hsl(125, 44%, 40%);
+    --color-led-dark: hsl(125, 44%, 20%);
+
+    --color-delay: hsl(117, 44%, 57%);
+    --color-delay-light: hsl(117, 44%, 67%);
+    --color-delay-dark: hsl(117, 44%, 47%);
+
+    --color-for: hsl(0, 60%, 48%);
+    --color-for-light: hsl(0, 60%, 58%);
+    --color-for-dark: hsl(0, 60%, 38%);
+    --color-for-blocks: hsl(0, 60%, 43%);
+}
