@@ -6,6 +6,22 @@ function isAlpha(str: string) {
     return /^[a-zA-Z]+$/.test(str);
 }
 
+function checkRangeValue(val: string, namespace: Set<string>) {
+    const valAsNumber = Number(val);
+
+    if (!isNaN(valAsNumber)) {
+        // Literal integer
+        if (!Number.isInteger(valAsNumber)) {
+            throw Error('From must be an integer.');
+        }
+    } else {
+        // Variable
+        if (!namespace.has(val)) {
+            throw Error(`Variable '${val}' does not exist.`)
+        }
+    }
+}
+
 class ForBlockModel extends BlockModel<4> {
     blocks = $state<BlockModel[]>([]);
 
@@ -37,47 +53,13 @@ class ForBlockModel extends BlockModel<4> {
         }
 
         // From
-        if (!isNaN(fromAsNumber)) {
-            // Literal integer
-            if (isNaN(fromAsNumber) || !Number.isInteger(fromAsNumber)) {
-                throw Error('From must be an non-negative integer.');
-            } else if (fromAsNumber < 0) {
-                throw Error('From must be an non-negative integer.');
-            }
-        } else {
-            // Variable
-            if (!namespace.has(from)) {
-                throw Error(`Variable '${from}' does not exist.`)
-            }
-        }
+        checkRangeValue(from, namespace);
 
 		// To
-        if (!isNaN(toAsNumber)) {
-            // Literal integer
-            if (isNaN(toAsNumber) || !Number.isInteger(toAsNumber)) {
-                throw Error('To must be an non-negative integer.');
-            } else if (toAsNumber < 0) {
-                throw Error('To must be an non-negative integer.');
-            }
-        } else {
-            // Variable
-            if (!namespace.has(to)) {
-                throw Error(`Variable '${to}' does not exist.`)
-            }
-        }
+        checkRangeValue(to, namespace);
 
         // Step
-        if (!isNaN(stepAsNumber)) {
-            // Literal integer
-            if (isNaN(stepAsNumber) || !Number.isInteger(stepAsNumber)) {
-                throw Error('Step must be an integer.');
-            }
-        } else {
-            // Variable
-            if (!namespace.has(step)) {
-                throw Error(`Variable '${step}' does not exist.`)
-            }
-        }
+        checkRangeValue(step, namespace);
 
         if (!isNaN(fromAsNumber) && !isNaN(toAsNumber) && !isNaN(stepAsNumber)) {
             if (fromAsNumber <= toAsNumber && stepAsNumber < 0) {

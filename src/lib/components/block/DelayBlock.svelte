@@ -18,6 +18,6 @@
 	errorMessage={model.errorMessage}
 >
 	delay for
-	<input type="number" bind:value={model.values[0]} />
+	<input type="text" bind:value={model.values[0]} />
 	ms
 </Block>

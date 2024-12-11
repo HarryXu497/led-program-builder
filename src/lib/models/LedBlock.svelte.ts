@@ -20,7 +20,7 @@ class LedBlockModel extends BlockModel<4> {
 
         if (!isNaN(ledPositionAsNumber)) {
             // Literal integer
-            if (isNaN(ledPositionAsNumber) || !Number.isInteger(ledPositionAsNumber)) {
+            if (!Number.isInteger(ledPositionAsNumber)) {
                 throw Error(`LED must be an integer between 1 and ${programMetadata.numLeds}.`);
             } else if (ledPositionAsNumber < 1 || ledPositionAsNumber > programMetadata.numLeds) {
                 throw Error(`LED must be an integer between 1 and ${programMetadata.numLeds}.`);

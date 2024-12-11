@@ -29,6 +29,14 @@ void setLED(int pos, int r, int g, int b) {
     leds[pos] = CRGB(r, g, b);
 }
 
+void delayMs(long long ms) {
+    if (ms < 0) {
+        return;
+    }
+
+    delay(ms);
+}
+
 void reset() {
     for (int i = 0; i < NUM_LEDS; i++) {
         leds[i] = CRGB(0, 0, 0);
