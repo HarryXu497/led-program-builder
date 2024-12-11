@@ -18,6 +18,11 @@ function transformSource(blocks: BlockModel[], { insertDelay = true, insertShowA
 
     const showPositions: number[] = [];
 
+    // Edge case: first command is delay
+    if (sourceCode[0] && sourceCode[0] instanceof DelayBlockModel) {
+        showPositions.push(0);
+    }
+
     // Insert a FastLED.show() command before a delay
     for (let i = 1; i < sourceCode.length; i++) {
         const currentBlock = sourceCode[i];
