@@ -2,7 +2,7 @@
 	import Block from './Block.svelte';
 
 	interface Props {
-        setting: string;
+		setting: string;
 		value: number;
 	}
 
@@ -10,11 +10,11 @@
 </script>
 
 <Block
-    --color-code-block="var(--color-bg-1)"
-    --color-code-block-light="var(--color-bg-1-light)"
-    --color-code-block-dark="var(--color-bg-1-dark)"
-    --border-width="8px"
+	--color-code-block="var(--color-bg-1)"
+	--color-code-block-light="var(--color-bg-1-light)"
+	--color-code-block-dark="var(--color-bg-1-dark)"
+	--border-width="8px"
 >
 	{setting}
-	<input type="number" bind:value={value}>
+	<input type="number" bind:value />
 </Block>

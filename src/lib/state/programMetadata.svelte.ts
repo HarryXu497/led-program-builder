@@ -28,30 +28,30 @@ export function createProgramMetadataState() {
 		get implicitDelay() {
 			return programMetadataState.implicitDelay;
 		},
-		set ledPin(newPin: number ) {
-            if (newPin === null) {
-                throw Error('Pin number must be an integer.');
-            }
+		set ledPin(newPin: number) {
+			if (newPin === null) {
+				throw Error('Pin number must be an integer.');
+			}
 			if (newPin < 0) {
 				throw Error('Pin number must be non-negative.');
 			}
 
 			programMetadataState.ledPin = newPin;
 		},
-		set numLeds(newNumLeds: number ) {
-            if (newNumLeds === null) {
-                throw Error('Number of LEDs must be an integer.');
-            }
+		set numLeds(newNumLeds: number) {
+			if (newNumLeds === null) {
+				throw Error('Number of LEDs must be an integer.');
+			}
 			if (newNumLeds < 0) {
 				throw Error('Number of LEDs must be non-negative.');
 			}
 
 			programMetadataState.numLeds = newNumLeds;
 		},
-		set implicitDelay(newDelay: number ) {
-            if (newDelay === null) {
-                throw Error('Implicit delay must be an integer.');
-            }
+		set implicitDelay(newDelay: number) {
+			if (newDelay === null) {
+				throw Error('Implicit delay must be an integer.');
+			}
 			if (newDelay < 1) {
 				throw Error('Implicit delay must be positive.');
 			}

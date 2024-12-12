@@ -1,7 +1,7 @@
-import programMetadata from "$lib/state/programMetadata.svelte";
+import programMetadata from '$lib/state/programMetadata.svelte';
 
 function buildProgram(loopCode: string) {
-    return `
+	return `
 #include <FastLED.h>
 
 #define LED_PIN ${programMetadata.ledPin}

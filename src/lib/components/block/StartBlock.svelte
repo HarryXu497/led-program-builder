@@ -15,13 +15,13 @@
 		font-family: 'Jetbrains Mono', monospace;
 		font-size: 2rem;
 		font-weight: bold;
-        display: flex;
-        flex-direction: row;
-        gap: 0.75rem;
-        align-items: center;
+		display: flex;
+		flex-direction: row;
+		gap: 0.75rem;
+		align-items: center;
 	}
 
-    i {
-        font-size: 1.75rem;
-    }
+	i {
+		font-size: 1.75rem;
+	}
 </style>

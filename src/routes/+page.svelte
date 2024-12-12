@@ -22,13 +22,13 @@
 	let blocks = $state<BlockModel[]>([]);
 
 	function onTranspile() {
-        try {
-            const output = transpile(blocks);
-            
-            transpilationOutput.value = buildProgram(output.join("\n"));
-        } catch (e) {
-            return;
-        }
+		try {
+			const output = transpile(blocks);
+
+			transpilationOutput.value = buildProgram(output.join('\n'));
+		} catch (e) {
+			return;
+		}
 	}
 
 	function handleDndConsider(e: CustomEvent<DndEvent<(typeof blocks)[number]>>) {
@@ -68,17 +68,17 @@
 			{@const onDelete = () => blocks.splice(i, 1)}
 			<div class="block-wrapper" animate:flip={{ duration: 300 }}>
 				{#if block instanceof LedBlockModel}
-					<LedBlock model={block} {onDelete}/>
+					<LedBlock model={block} {onDelete} />
 				{/if}
 				{#if block instanceof DelayBlockModel}
-					<DelayBlock model={block} {onDelete}/>
+					<DelayBlock model={block} {onDelete} />
 				{/if}
-                {#if block instanceof ForBlockModel}
-                    <ForBlock model={block} {onDelete}/>
-                {/if}
-                {#if block instanceof ResetBlockModel}
-                    <ResetBlock {onDelete}/>
-                {/if}  
+				{#if block instanceof ForBlockModel}
+					<ForBlock model={block} {onDelete} />
+				{/if}
+				{#if block instanceof ResetBlockModel}
+					<ResetBlock {onDelete} />
+				{/if}
 			</div>
 		{/each}
 	</div>
@@ -103,59 +103,59 @@
 		overflow-y: auto;
 		box-sizing: border-box;
 
-		background-color:  hsl(204, 40%, 74%);
+		background-color: hsl(204, 40%, 74%);
 		border-left: 8px solid hsl(204, 40%, 84%);
 		border-top: 8px solid hsl(204, 40%, 84%);
 		border-right: 8px solid hsl(204, 40%, 64%);
 		border-bottom: 8px solid hsl(204, 40%, 64%);
 	}
 
-    .program {
-        padding-bottom: 8rem;
-    }
+	.program {
+		padding-bottom: 8rem;
+	}
 
-    /* width */
-    .program-wrapper::-webkit-scrollbar {
-        width: 0.5rem;
-        height: 0.5rem;
-    }
+	/* width */
+	.program-wrapper::-webkit-scrollbar {
+		width: 0.5rem;
+		height: 0.5rem;
+	}
 
-    /* Track */
-    .program-wrapper::-webkit-scrollbar-track {
-        background: var(--color-bg-3-track);
-    }
-    
-    /* Handle */
-    .program-wrapper::-webkit-scrollbar-thumb {
-        background: var(--color-bg-3-light);
-    }
+	/* Track */
+	.program-wrapper::-webkit-scrollbar-track {
+		background: var(--color-bg-3-track);
+	}
 
-    /* Handle on hover */
-    .program-wrapper::-webkit-scrollbar-thumb:hover {
-        background: var(--color-bg-3-thumb-hover);
-    }
+	/* Handle */
+	.program-wrapper::-webkit-scrollbar-thumb {
+		background: var(--color-bg-3-light);
+	}
+
+	/* Handle on hover */
+	.program-wrapper::-webkit-scrollbar-thumb:hover {
+		background: var(--color-bg-3-thumb-hover);
+	}
 
 	.program {
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
 	}
-    .program.expand {
+	.program.expand {
 		gap: 0.5rem;
 
-        padding-bottom: 45px;
+		padding-bottom: 45px;
 	}
 	.transpile-button {
 		all: unset;
 
 		font-family: 'Jetbrains Mono', monospace;
 		padding: 1rem 2rem;
-        background-color: var(--color-bg-1);
+		background-color: var(--color-bg-1);
 		box-sizing: border-box;
 
 		border-left: 5px solid var(--color-bg-1-light);
 		border-top: 5px solid var(--color-bg-1-light);
-        border-right: 5px solid var(--color-bg-1-dark);
+		border-right: 5px solid var(--color-bg-1-dark);
 		border-bottom: 5px solid var(--color-bg-1-dark);
 		font-size: 2rem;
 		color: hsl(0, 0%, 98%);
@@ -168,7 +168,7 @@
 	.transpile-button.clicked {
 		border-left: 5px solid var(--color-bg-1-dark);
 		border-top: 5px solid var(--color-bg-1-dark);
-        border-right: 5px solid var(--color-bg-1-light);
+		border-right: 5px solid var(--color-bg-1-light);
 		border-bottom: 5px solid var(--color-bg-1-light);
 	}
 

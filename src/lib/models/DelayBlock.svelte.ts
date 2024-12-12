@@ -8,21 +8,21 @@ class DelayBlockModel extends BlockModel<1> {
 
 	transpile(namespace: Set<string>): string[] {
 		const delayMs = this.values[0];
-        const delayMsAsNumber = Number(delayMs);
+		const delayMsAsNumber = Number(delayMs);
 
-        if (!isNaN(delayMsAsNumber)) {
-            // Literal integer
-            if (!Number.isInteger(delayMsAsNumber)) {
-                throw Error('LED delay must be an integer larger than 0.');
-            } else if (delayMsAsNumber < 1) {
-                throw Error('LED delay must be an integer larger than 0.');
-            }
-        } else {
-            // Variable
-            if (!namespace.has(delayMs)) {
-                throw Error(`Variable '${delayMs}' does not exist.`)
-            }
-        }
+		if (!isNaN(delayMsAsNumber)) {
+			// Literal integer
+			if (!Number.isInteger(delayMsAsNumber)) {
+				throw Error('LED delay must be an integer larger than 0.');
+			} else if (delayMsAsNumber < 1) {
+				throw Error('LED delay must be an integer larger than 0.');
+			}
+		} else {
+			// Variable
+			if (!namespace.has(delayMs)) {
+				throw Error(`Variable '${delayMs}' does not exist.`);
+			}
+		}
 
 		return [`delayMs(${delayMs});`];
 	}
