@@ -16,7 +16,7 @@ function checkRangeValue(val: string, namespace: Set<string>) {
 		}
 	} else {
 		// Variable
-		if (!namespace.has(val)) {
+		if (!namespace.has(val) && val.indexOf(" ") === -1) {
 			throw Error(`Variable '${val}' does not exist.`);
 		}
 	}

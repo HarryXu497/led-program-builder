@@ -15,7 +15,7 @@ function transformSource(
 	const sourceCode = [...blocks];
 
 	// Edge case: no delays => insert a delay
-	if (insertDelay && sourceCode.every((block) => !(block instanceof DelayBlockModel))) {
+	if (insertDelay && sourceCode.every((block) => !(block instanceof DelayBlockModel))) { 
 		sourceCode.push(new DelayBlockModel([programMetadata.implicitDelay.toString()]));
 	}
 

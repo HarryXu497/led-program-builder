@@ -52,8 +52,8 @@ export function createProgramMetadataState() {
 			if (newDelay === null) {
 				throw Error('Implicit delay must be an integer.');
 			}
-			if (newDelay < 1) {
-				throw Error('Implicit delay must be positive.');
+			if (newDelay < 0) {
+				throw Error('Implicit delay must be non-negative.');
 			}
 
 			programMetadataState.implicitDelay = newDelay;

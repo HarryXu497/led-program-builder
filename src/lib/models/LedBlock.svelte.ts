@@ -29,7 +29,7 @@ class LedBlockModel extends BlockModel<4> {
 			ledPosition = (ledPositionAsNumber - 1).toString();
 		} else {
 			// Variable
-			if (!namespace.has(ledPosition)) {
+			if (!namespace.has(ledPosition) && ledPosition.indexOf(" ") === -1) {
 				throw Error(`Variable '${ledPosition}' does not exist.`);
 			}
 
