@@ -48,6 +48,8 @@ void setup() {
         leds,
         NUM_LEDS
     );
+
+    reset();
 }
 
 void loop() {

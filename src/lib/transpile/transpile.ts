@@ -4,19 +4,18 @@ import ShowBlockModel from '$lib/models/ShowBlock.svelte';
 import programMetadata from '$lib/state/programMetadata.svelte';
 
 interface TransformSourceOptions {
-	insertDelay?: boolean;
 	insertShowAtEnd?: boolean;
 }
 
 function transformSource(
 	blocks: BlockModel[],
-	{ insertDelay = true, insertShowAtEnd = true }: TransformSourceOptions
+	{ insertShowAtEnd = true }: TransformSourceOptions
 ) {
 	const sourceCode = [...blocks];
 
 	// Edge case: no delays => insert a delay
-	if (insertDelay && sourceCode.every((block) => !(block instanceof DelayBlockModel))) { 
-		sourceCode.push(new DelayBlockModel([programMetadata.implicitDelay.toString()]));
+	if (insertShowAtEnd) { 
+		sourceCode.push(new ShowBlockModel());
 	}
 
 	const showPositions: number[] = [];
@@ -34,11 +33,6 @@ function transformSource(
 		if (currentBlock instanceof DelayBlockModel && !(previousBlock instanceof DelayBlockModel)) {
 			showPositions.push(i);
 		}
-	}
-
-	// Insert a FastLED.show() command if the last command is not a delay
-	if (insertShowAtEnd && !(sourceCode[sourceCode.length - 1] instanceof DelayBlockModel)) {
-		showPositions.push(sourceCode.length);
 	}
 
 	for (let i = showPositions.length - 1; i >= 0; i--) {

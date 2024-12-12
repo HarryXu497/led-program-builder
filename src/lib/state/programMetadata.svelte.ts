@@ -1,18 +1,15 @@
 interface ProgramMetadata {
 	ledPin: number;
 	numLeds: number;
-	implicitDelay: number;
 }
 
 export const DEFAULT_LED_PIN = 7;
 export const DEFAULT_NUM_LEDS = 5;
-export const DEFAULT_IMPLICIT_DELAY = 100;
 
 export function createProgramMetadataState() {
 	let programMetadataState = $state<ProgramMetadata>({
 		ledPin: DEFAULT_LED_PIN,
 		numLeds: DEFAULT_NUM_LEDS,
-		implicitDelay: DEFAULT_IMPLICIT_DELAY
 	});
 
 	return {
@@ -24,9 +21,6 @@ export function createProgramMetadataState() {
 		},
 		get numLeds() {
 			return programMetadataState.numLeds;
-		},
-		get implicitDelay() {
-			return programMetadataState.implicitDelay;
 		},
 		set ledPin(newPin: number) {
 			if (newPin === null) {
@@ -48,16 +42,6 @@ export function createProgramMetadataState() {
 
 			programMetadataState.numLeds = newNumLeds;
 		},
-		set implicitDelay(newDelay: number) {
-			if (newDelay === null) {
-				throw Error('Implicit delay must be an integer.');
-			}
-			if (newDelay < 0) {
-				throw Error('Implicit delay must be non-negative.');
-			}
-
-			programMetadataState.implicitDelay = newDelay;
-		}
 	};
 }
 

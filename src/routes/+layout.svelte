@@ -137,7 +137,6 @@
 	<ul class="settings">
 		<SettingBlock setting="Number of LEDs" bind:value={programMetadata.numLeds} />
 		<SettingBlock setting="LED Pin" bind:value={programMetadata.ledPin} />
-		<SettingBlock setting="Implicit Delay" bind:value={programMetadata.implicitDelay} />
 	</ul>
 	<div class="lights">
 		{#each { length: Math.floor(innerWidth.current! / LIGHT_SIZE) }, i}

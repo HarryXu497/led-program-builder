@@ -81,7 +81,6 @@ class ForBlockModel extends BlockModel<4> {
 		namespace.add(varName);
 
 		const blockOutput = transpile(this.blocks, namespace, {
-			insertDelay: false,
 			insertShowAtEnd: false
 		});
 
