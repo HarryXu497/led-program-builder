@@ -9,11 +9,11 @@
 	--color-bg-2-track: hsl(207, 33%, 83%);
 	--color-bg-2-thumb-hover: hsl(207, 33%, 75%);
 
-	--color-bg-3: hsl(214, 33%, 40%);
-	--color-bg-3-light: hsl(214, 33%, 50%);
-	--color-bg-3-dark: hsl(214, 33%, 30%);
-	--color-bg-3-track: hsl(214, 33%, 60%);
-	--color-bg-3-thumb-hover: hsl(207, 33%, 52%);
+	--color-bg-3: hsl(204, 40%, 74%);
+	--color-bg-3-light: hsl(204, 40%, 84%);
+	--color-bg-3-dark: hsl(204, 40%, 64%);
+	--color-bg-3-track: hsl(204, 40%, 94%);
+	--color-bg-3-thumb-hover: hsl(204, 40%, 69%);
 
 	--color-led: hsl(125, 44%, 30%);
 	--color-led-light: hsl(125, 44%, 40%);

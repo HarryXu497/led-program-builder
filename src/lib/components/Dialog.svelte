@@ -26,6 +26,7 @@
 		font-family: 'Jetbrains Mono', monospace;
 		width: clamp(16rem, 48%, 48rem);
 		padding: 0.5rem;
+        box-sizing: border-box;
 		overflow: visible;
 		background-color: hsl(0, 0%, 95%);
 
@@ -35,11 +36,11 @@
 		max-height: clamp(4rem, 60%, 32rem);
 		overflow-y: auto;
 
-		background-color: hsl(204, 40%, 74%);
-		border-left: 8px solid hsl(204, 40%, 84%);
-		border-top: 8px solid hsl(204, 40%, 84%);
-		border-right: 8px solid hsl(204, 40%, 64%);
-		border-bottom: 8px solid hsl(204, 40%, 64%);
+		background-color: var(--color-bg-3);
+		border-left: 8px solid var(--color-bg-3-light);
+		border-top: 8px solid var(--color-bg-3-light);
+		border-right: 8px solid var(--color-bg-3-dark);
+		border-bottom: 8px solid var(--color-bg-3-dark);
 	}
 
 	/* width */
