@@ -67,9 +67,8 @@
 			<div class="hr"></div>
 			<div class="info-snippet__examples__example">
 				<p>
-					A Delay block can be used with a For Block. The below block will delay for <b
-						>10 seconds</b
-					>, then <b>20 seconds</b>, all the way up to <b>100 seconds</b>!
+					A Delay block can be used with a For Block. The below block will delay for
+                    <b>10 seconds</b>, then <b>20 seconds</b>, all the way up to <b>100 seconds</b>!
 				</p>
 				<ForBlock
 					model={new ForBlockModel(['i', '10', '100', '10'], [new DelayBlockModel(['i'])])}
